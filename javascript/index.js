@@ -150,3 +150,18 @@ document.getElementById("searchButton").addEventListener("click", () => {
   console.log(query);
   fetchSearchData(query);
 });
+
+var searchElements = document.getElementsByClassName("searchElement");
+
+for (var i = 0; i < searchElements.length; i++) {
+  searchElements[i].addEventListener("click", (e) => {
+    var query = e.target.textContent;
+    console.log(query);
+    query = query.replace("/\n/g", "");
+    query = query.replace("/\t/g", "");
+    query = query.replace("/\r/g", "");
+    query = query.trim();
+    document.getElementById("searchMovies").value = query;
+    fetchSearchData(query);
+  });
+}
