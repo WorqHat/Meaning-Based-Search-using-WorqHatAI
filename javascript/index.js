@@ -1,6 +1,6 @@
 /* jshint esversion:9 */
 
-function createBlocks(data) {
+function createBlocks(data, distance) {
   const div = document.createElement("div");
   div.classList.add(
     "flex",
@@ -101,6 +101,7 @@ function fetchSearchData(query) {
   const data = JSON.stringify({
     question: query,
     training_data: "3b6c76a4-04c4-45f2-8372-09e2ee34f33e",
+    search_count: 10,
   });
 
   const xhr = new XMLHttpRequest();
@@ -111,14 +112,14 @@ function fetchSearchData(query) {
       var content = JSON.parse(this.responseText);
       console.log(content);
       document.getElementById("movieGrid").innerHTML = "";
-      content.result.forEach((movie) => {
-        createBlocks(movie);
+      content.data.forEach((movie) => {
+        createBlocks(movie.results, movie.distance);
       });
-      document.getElementById("counter").textContent = content.result.length;
+      document.getElementById("counter").textContent = content.data.length;
     }
   });
 
-  xhr.open("POST", "https://api.worqhat.com/api/ai/search/v2");
+  xhr.open("POST", "https://api.worqhat.com/api/ai/search/v3");
   xhr.setRequestHeader(
     "Authorization",
     "Bearer sk-721170e3cd914bd08a2f77113815d38e"
