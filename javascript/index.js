@@ -67,9 +67,16 @@ function createBlocks(data, distance) {
   p2.appendChild(document.createTextNode("Release Date: "));
   p2.appendChild(span);
 
+  const span2 = document.createElement("span");
+  span2.className =
+    "bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded max-w-max mt-3";
+  span2.title = "Distance from the Search Query is " + distance;
+  span2.textContent = distance;
+
   innerDiv.appendChild(h5);
   innerDiv.appendChild(p1);
   innerDiv.appendChild(p2);
+  innerDiv.appendChild(span2);
 
   div.appendChild(img);
   div.appendChild(innerDiv);
